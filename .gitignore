@@ -1,0 +1,16 @@
+# C++
+*.o
+*.out
+*.obj
+*.exe
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build folders
+/build/
+bin/
+
+CameraController/.vs/
