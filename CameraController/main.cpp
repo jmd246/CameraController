@@ -11,20 +11,27 @@ const int width = 600, height = 800;
 
 int	main() {
 	Setup* setup = new	Setup(width, height);
+	const int size = 3;
+	float spacing = 2.5f;
+	glm::vec3 cubePositions[size * size * size];
+	int index = 0;
+
+	glm::vec3 offset = glm::vec3(
+		-((size - 1) * spacing) / 2.0f,
+		-((size - 1) * spacing) / 2.0f,
+		-((size - 1) * spacing) / 2.0f
+	);
+
+	for (int x = 0; x < size; x++) {
+		for (int y = 0; y < size; y++) {
+			for (int z = 0; z < size; z++) {
+				cubePositions[index++] = glm::vec3(x * spacing, y * spacing, z * spacing) + offset;
+			}
+		}
+	}
 
 
-	glm::vec3 cubePositions[] = {
-	glm::vec3(0.0f,  0.0f,  0.0f),
-	glm::vec3(2.0f,  5.0f, -15.0f),
-	glm::vec3(-1.5f, -2.2f, -2.5f),
-	glm::vec3(-3.8f, -2.0f, -12.3f),
-	glm::vec3(2.4f, -0.4f, -3.5f),
-	glm::vec3(-1.7f,  3.0f, -7.5f),
-	glm::vec3(1.3f, -2.0f, -2.5f),
-	glm::vec3(1.5f,  2.0f, -2.5f),
-	glm::vec3(1.5f,  0.2f, -1.5f),
-	glm::vec3(-1.3f,  1.0f, -1.5f)
-	};
+
 
 
 	float cubeVertices[] = {
@@ -127,6 +134,8 @@ int	main() {
 	for (TextureLoader* tex : textures) {
 		delete	tex;
 	}
+	glDeleteBuffers(1, &VBO);
+	glDeleteVertexArrays(1, &VAO);
 	glfwTerminate();
 
 	return	0;
